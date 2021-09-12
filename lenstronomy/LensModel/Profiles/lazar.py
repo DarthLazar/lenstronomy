@@ -43,7 +43,6 @@ class Lazar(LensProfileBase, SersicUtil):
     """
 
     profile_name = 'Lazar'
-    beta = 0.3
 
     ###### start modifying things here.
     param_names = ['k_eff', 'R_sersic', 'center_x', 'center_y']
@@ -53,6 +52,8 @@ class Lazar(LensProfileBase, SersicUtil):
     def __init__(self):
         # the profile is the same form as the Sersics profile.
         # the mapping follows as n --> 1/beta, b --> 1/beta and the lensing properties are in Cardone 2004
+
+        beta = 0.3
         self.n_sersic = 1.0/beta
         self.b = 1.0/beta
 
