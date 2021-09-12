@@ -94,7 +94,7 @@ class SersicUtil(object):
         x_reduced = (r/r_eff)**(1./n_sersic)
         return x_reduced
 
-    def _alpha_eff(self, r_eff, n_sersic, k_eff):
+    def _alpha_eff(self, r_eff, n_sersic, k_eff, b_n=None):
         """
         deflection angle at r_eff
         :param r_eff:
@@ -102,11 +102,13 @@ class SersicUtil(object):
         :param k_eff:
         :return:
         """
-        b = self.b_n(n_sersic)
+        b = b_n
+        if b == None:
+            b = self.b_n(n_sersic)
         alpha_eff = n_sersic * r_eff * k_eff * b**(-2*n_sersic) * np.exp(b) * special.gamma(2*n_sersic)
         return -alpha_eff
 
-    def alpha_abs(self, x, y, n_sersic, r_eff, k_eff, center_x=0, center_y=0):
+    def alpha_abs(self, x, y, n_sersic, r_eff, k_eff, center_x=0, center_y=0, b_n=None):
         """
 
         :param x:
@@ -120,7 +122,9 @@ class SersicUtil(object):
         """
         n = n_sersic
         x_red = self._x_reduced(x, y, n_sersic, r_eff, center_x, center_y)
-        b = self.b_n(n_sersic)
+        b = b_n
+        if b == None:
+            b = self.b_n(n_sersic)
         a_eff = self._alpha_eff(r_eff, n_sersic, k_eff)
         alpha = 2. * a_eff * x_red ** (-n) * (special.gammainc(2 * n, b * x_red))
         return alpha

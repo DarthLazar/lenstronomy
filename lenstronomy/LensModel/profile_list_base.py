@@ -7,7 +7,7 @@ _SUPPORTED_MODELS = ['SHIFT', 'NIE_POTENTIAL', 'CONST_MAG', 'SHEAR', 'SHEAR_GAMM
                      'FLEXIONFG', 'POINT_MASS', 'SIS', 'SIS_TRUNCATED', 'SIE', 'SPP', 'NIE', 'NIE_SIMPLE', 'CHAMELEON',
                      'DOUBLE_CHAMELEON', 'TRIPLE_CHAMELEON', 'SPEP', 'PEMD', 'SPEMD', 'EPL', 'EPL_NUMBA', 'SPL_CORE',
                      'NFW', 'NFW_ELLIPSE', 'NFW_ELLIPSE_GAUSS_DEC', 'TNFW', 'TNFW_ELLIPSE',
-                     'CNFW', 'CNFW_ELLIPSE', 'CTNFW_GAUSS_DEC', 'NFW_MC', 'SERSIC',
+                     'CNFW', 'CNFW_ELLIPSE', 'CTNFW_GAUSS_DEC', 'NFW_MC', 'Lazar', 'SERSIC',
                      'SERSIC_ELLIPSE_POTENTIAL', 'SERSIC_ELLIPSE_KAPPA', 'SERSIC_ELLIPSE_GAUSS_DEC', 'PJAFFE',
                      'PJAFFE_ELLIPSE', 'HERNQUIST', 'HERNQUIST_ELLIPSE', 'GAUSSIAN', 'GAUSSIAN_KAPPA',
                      'GAUSSIAN_ELLIPSE_KAPPA', 'GAUSSIAN_ELLIPSE_POTENTIAL', 'MULTI_GAUSSIAN_KAPPA',
@@ -70,6 +70,9 @@ class ProfileListBase(object):
         :return: class instance of the lens model type
         """
 
+        if lens_type == 'Lazar':
+            from lenstronomy.LensModel.Profiles.lazar import Lazar
+            return Lazar()
         if lens_type == 'SHIFT':
             from lenstronomy.LensModel.Profiles.constant_shift import Shift
             return Shift()

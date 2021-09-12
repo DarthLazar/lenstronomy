@@ -74,10 +74,10 @@ class Lazar(LensProfileBase, SersicUtil):
         n = self.n_sersic; b = self.b
         x_red = self._x_reduced(x, y, n, R_sersic, center_x, center_y)
         hyper2f2_bx = util.hyper2F2_array(2.0*n, 2.0*n, 1.0+2.0*n, 1.0+2.0*n, -b*x_red)
-        hyper2f2_b = util.hyper2F2_array(2.0*n, 2.0*n, 1.0+2.0*n, 1.0+2.0*n, -b)
-        f_eff = np.exp(b) * R_sersic**2 / 2.0 * k_eff  * hyper2f2_b
+        #hyper2f2_b = util.hyper2F2_array(2.0*n, 2.0*n, 1.0+2.0*n, 1.0+2.0*n, -b)
+        f_eff = np.exp(b) * R_sersic**2 / 2.0 * k_eff  #* hyper2f2_b
 
-        return f_eff * x_red**(2.0 * n) * hyper2f2_bx / hyper2f2_b
+        return f_eff * x_red**(2.0 * n) * hyper2f2_bx #/ hyper2f2_b
 
     ###############################################################################################
 
