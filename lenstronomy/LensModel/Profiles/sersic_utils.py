@@ -125,11 +125,11 @@ class SersicUtil(object):
         b = b_n
         if b == None:
             b = self.b_n(n_sersic)
-        a_eff = self._alpha_eff(r_eff, n_sersic, k_eff)
+        a_eff = self._alpha_eff(r_eff, n_sersic, k_eff, b_n=b)
         alpha = 2. * a_eff * x_red ** (-n) * (special.gammainc(2 * n, b * x_red))
         return alpha
 
-    def d_alpha_dr(self, x, y, n_sersic, r_eff, k_eff, center_x=0, center_y=0):
+    def d_alpha_dr(self, x, y, n_sersic, r_eff, k_eff, center_x=0, center_y=0, b_n=None):
         """
 
         :param x:
@@ -145,8 +145,11 @@ class SersicUtil(object):
         x_ = x - center_x
         y_ = y - center_y
         r = np.sqrt(x_**2 + y_**2)
-        alpha = self.alpha_abs(r, 0, n_sersic, r_eff, k_eff)
-        alpha_dr = self.alpha_abs(r+_dr, 0, n_sersic, r_eff, k_eff)
+        b = b_n
+        if b == None:
+            b = self.b_n(n_sersic)
+        alpha = self.alpha_abs(r, 0, n_sersic, r_eff, k_eff, bn=b)
+        alpha_dr = self.alpha_abs(r+_dr, 0, n_sersic, r_eff, k_eff, bn=b)
         d_alpha_dr = (alpha_dr - alpha)/_dr
         return d_alpha_dr
 
